@@ -1,37 +1,48 @@
 import socket
 import sys
 
-# address and port where client would connect to
-address_port = ("localhost", 31001)
+# input Address and Destination Port
+ADDRESS = input("Enter server address: ")
+DEST_PORT = int(input("Enter port number: "))
 
 # filename request
-file_request = "test.txt"
-
-# create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# connect the socket to the port where the server is listening
-sock.connect(address_port)
+file_request = input("Input filename to request: ")
 
 try:
-    # sending file request to the server
-    print(f"Requesting {file_request} to server....")
-    sock.send(file_request.encode())
+    # address and port where client would connect to
+    address_port = (ADDRESS, DEST_PORT)
+    # create a TCP/IP socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # connect the socket to the port where the server is listening
+    sock.connect(address_port)
 
-    # shutdown socket to receive incoming file
-    sock.shutdown(socket.SHUT_WR)
+    try:
+        # sending file request to the server
+        print(f"Requesting {file_request} to server....")
+        sock.send(file_request.encode())
 
-    # write incoming file
-    f = open("result.txt", "wb")
-    while True:
+        # shutdown socket to receive incoming file
+        sock.shutdown(socket.SHUT_WR)
+
         data = sock.recv(1024)
-        if data:
-            f.write(data)
+        if not data:
+            print("File not found on the server")
         else:
-            f.close()
-            break
-finally:
-    print("File received from the server")
+            f = open("test_result.pdf", "wb")
+            f.write(data)
+            while True:
+                data = sock.recv(1024)
+                if data:
+                    f.write(data)
+                else:
+                    f.close()
+                    break
+            print("File received")
 
-    # close connection
-    sock.close()
+    finally:
+        # close connection
+        sock.close()
+        print("Connection closed")
+except:
+    print("Error, server is unavailable. Closing...")
+    exit(-1)

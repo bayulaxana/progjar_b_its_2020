@@ -1,11 +1,14 @@
 import socket
 import sys
 
+ADDRESS = "127.0.0.1"
+SERVER_PORT = 31000
+
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 31000)
+server_address = (ADDRESS, SERVER_PORT)
 print("Starting up on {0} port {1}".format(server_address[0], server_address[1]))
 print("===================================")
 sock.bind(server_address)
@@ -23,7 +26,6 @@ while True:
     # open file for writing
     f = open("server/test_server.pdf", "wb")
 
-    print(f"==> Receiving the file from client")
     while True:
         data = connection.recv(1024)
         if data:
@@ -31,6 +33,8 @@ while True:
         else:
             f.close()
             break
+
+    print("==> File received successfully")
 
     # server sends respond to client
     # confirming the file has received

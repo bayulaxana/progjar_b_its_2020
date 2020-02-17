@@ -1,11 +1,14 @@
 import socket
 import sys
 
+ADDRESS = "127.0.0.1"
+SERVER_PORT = 31001
+
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 31001)
+server_address = (ADDRESS, SERVER_PORT)
 print("Starting up on {0} port {1}".format(server_address[0], server_address[1]))
 print("===================================")
 sock.bind(server_address)
@@ -30,19 +33,16 @@ while True:
             break
 
     print("==> File requested: " + s)
-
-    # send the requested file
-    f = open(s, "rb")
-    print("==> Sending file...")
-
-    buff = f.read(1024)
-    while buff:
-        connection.send(buff)
+    try:
+        f = open(s, "rb")
         buff = f.read(1024)
-
-    print("==> File sent")
-    # close file after reading
-    f.close()
+        while buff:
+            connection.send(buff)
+            buff = f.read(1024)
+        f.close()
+    except:
+        print(f"==> File {s} not found")
+        connection.send(b"")
 
     # Clean up the connection
     connection.close()
