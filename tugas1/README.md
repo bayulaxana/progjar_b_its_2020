@@ -44,11 +44,49 @@ Server berjalan pada tiga port.
     ![](img/server31002.png)
 
 
-### Jalankan program client.py untuk konek ke server pada poin sebelumnya, kirimkan string yang sama 
+### Jalankan program server.py di 3 port yang berbeda di 2 komputer yang berbeda.
+
+- IP komputer 1 adalah `10.151.254.205`. Server dijalankan pada 3 port yang berbeda.
+
+    + Server port 31000
+
+        ![](img/Ss1x.png)
+
+    + Server port 31001
+
+        ![](img/Ss2x.png)
+
+    + Server port 31002
+
+        ![](img/Ss3x.png)
+
+- IP komputer 2 adalah `10.151.62.227`. Server dijalankan pada 3 port yang berbeda.
+
+    + Server port 31000
+
+        ![](img/server31000zaldi.png)
+
+    + Server port 31001
+
+        ![](img/server31001zaldi.png)
+
+    + Server port 31002
+
+        ![](img/server31002zaldi.png)
+
+### Jalankan program client.py untuk konek ke server pada poin sebelumnya, kirimkan string yang sama.
+
+- Hasil client mengirim dari komputer 1 menuju komputer 2 pada port 31000, 31001, dan 31002.
+
+    ![](img/clientzaldi31000.png)
+
+    ![](img/clientzaldi31001.png)
+
+    ![](img/clientzaldi31002.png)
 
 ----
 
-1. MODIFIKASILAH program `client.py` dan `server.py` agar dapat MENTRANSFER file dari client ke server (letakkan program modifikasi di direktori tugas1a).
+1. ### MODIFIKASILAH program `client.py` dan `server.py` agar dapat MENTRANSFER file dari client ke server (letakkan program modifikasi di direktori tugas1a).
 
     [**Program `server.py` dapat dilihat disini >**](tugas1a/server.py)
 
@@ -66,7 +104,7 @@ Server berjalan pada tiga port.
 
     ![](img/Ss3.png)
 
-2. MODIFIKASILAH program server.py agar dapat mengirimkan MENTRANSFER FILE yang di request oleh client (letakkan program modifikasi di direktori tugas1b).
+2. ### MODIFIKASILAH program server.py agar dapat mengirimkan MENTRANSFER FILE yang di request oleh client (letakkan program modifikasi di direktori tugas1b).
 
     [**Program `server.py` dapat dilihat disini >**](tugas1b/server.py)
 
