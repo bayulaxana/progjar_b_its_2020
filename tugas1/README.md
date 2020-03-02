@@ -4,7 +4,47 @@ Nama  : Bayu Laksana<br>
 NRP   : 05111740000020<br>
 Kelas : B
 
+### Jalankan program server.py di 3 port yang berbeda (31000, 31001, 31002).
 
+Server berjalan pada tiga port.
+
+- Server port 31000
+
+    ![](img/Ss1x.png)
+
+- Server port 31001
+
+    ![](img/Ss2x.png)
+
+- Server port 31002
+
+    ![](img/Ss3x.png)
+
+
+### Jalankan program client.py untuk konek ke server yang jalan pada poin sebelumnya dan mengirimkan string “JARINGAN TEKNIK INFORPEMROGRAMAN MATIKA”.
+
+- Client mengirim ke server port 31000
+
+    ![](img/client31000.png)
+
+- Client mengirim ke server port 31001
+
+    ![](img/client31001.png)
+
+- Client mengirim ke server port 31002
+
+    ![](img/client31002.png)
+
+- Server merespon dari client
+
+    ![](img/server31000.png)
+
+    ![](img/server31001.png)
+
+    ![](img/server31002.png)
+
+
+### Jalankan program client.py untuk konek ke server pada poin sebelumnya, kirimkan string yang sama 
 
 ----
 
