@@ -84,6 +84,10 @@ Server berjalan pada tiga port.
 
     ![](img/clientzaldi31002.png)
 
+### Jalankan program server.py di 2 komputer yang berbeda, masing-masing 2 server di port yang berbeda.
+
+Soal ini memiliki karakteristik yang sama dengan soal [ini](#jalankan-program-serverpy-di-3-port-yang-berbeda-di-2-komputer-yang-berbeda). Hanya saja dijalankan menggunakan 2 port.
+
 ----
 
 1. ### MODIFIKASILAH program `client.py` dan `server.py` agar dapat MENTRANSFER file dari client ke server (letakkan program modifikasi di direktori tugas1a).
