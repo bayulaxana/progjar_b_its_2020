@@ -87,6 +87,30 @@ sock.sendto( bytes(data_to_send.encode()), (TARGET_IP,TARGET_PORT) )
     ip.dst == 127.0.0.1 && udp.port == 5006
     ```
 
+- Output pada console setelah program dijalankan
+
+    ```
+    b'F' terkirim 1 of 149 
+    b'i' terkirim 2 of 149 
+    b'l' terkirim 3 of 149 
+    b'e' terkirim 4 of 149 
+    b' ' terkirim 5 of 149 
+    b'T' terkirim 6 of 149 
+    b'e' terkirim 7 of 149 
+    b's' terkirim 8 of 149 
+    b't' terkirim 9 of 149 
+    b'\r' terkirim 10 of 149 
+    b'\n' terkirim 11 of 149 
+    b'=' terkirim 12 of 149 
+    b'=' terkirim 13 of 149 
+    b'=' terkirim 14 of 149 
+    b'=' terkirim 15 of 149 
+    ...
+    ...
+    ...
+    [Dan masih banyak lagi]
+    ```
+
 - Hasil capture setelah program dijalankan
 
     ![](img/SS1.png)
