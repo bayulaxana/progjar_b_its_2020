@@ -108,6 +108,14 @@ Soal ini memiliki karakteristik yang sama dengan soal [ini](#jalankan-program-se
 
     ![](img/Ss3.png)
 
+    - File yang dikirim
+
+        ![](img/fileto1a.png)
+
+    - File yang diterima
+
+        ![](img/filerecev1a.png)
+
 2. ### MODIFIKASILAH program server.py agar dapat mengirimkan MENTRANSFER FILE yang di request oleh client (letakkan program modifikasi di direktori tugas1b).
 
     [**Program `server.py` dapat dilihat disini >**](tugas1b/server.py)
@@ -129,3 +137,11 @@ Soal ini memiliki karakteristik yang sama dengan soal [ini](#jalankan-program-se
     Client merepson bahwa file telah diterima dan nantinya akan disimpan dengan nama "test_result.pdf" sebagai penanda bahwa file telah diterima.
 
     ![](img/S2-4.png)
+
+    - File yang direquest oleh client
+
+        ![](img/filerequested1b.png)
+
+    - File yang diterima client
+
+        ![](img/filerecev1b.png)
