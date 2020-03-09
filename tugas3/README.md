@@ -52,4 +52,4 @@ Output konsol saat program client3 dijalankan :
 
 ![](linked-list-concept.jpg.jpg)
 
-https://cdn.programiz.com/sites/tutorial2program/files/linked-list-concept.jpg
+> Gambar 3. Sumber: https://cdn.programiz.com/sites/tutorial2program/files/linked-list-concept.jpg
