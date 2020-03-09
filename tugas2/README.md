@@ -4,6 +4,10 @@ Nama  : Bayu Laksana<br>
 NRP   : 05111740000020<br>
 Kelas : B
 
+## Mengirim ke localhost 127.0.0.1
+
+----
+
 ### Soal 1
 
 Menggunakan wireshark, capture hasil keluaran dari program `udpfileclient.py` ke alamat **127.0.0.1** ke port **5006**.
@@ -58,6 +62,30 @@ sock.shutdown(socket.SHUT_WR)
 
     ![](img/SS3.png)
 
+- Output pada console setelah program dijalankan
+
+    ```
+    b'F' terkirim 1 of 149 
+    b'i' terkirim 2 of 149 
+    b'l' terkirim 3 of 149 
+    b'e' terkirim 4 of 149 
+    b' ' terkirim 5 of 149 
+    b'T' terkirim 6 of 149 
+    b'e' terkirim 7 of 149 
+    b's' terkirim 8 of 149 
+    b't' terkirim 9 of 149 
+    b'\r' terkirim 10 of 149 
+    b'\n' terkirim 11 of 149 
+    b'=' terkirim 12 of 149 
+    b'=' terkirim 13 of 149 
+    b'=' terkirim 14 of 149 
+    b'=' terkirim 15 of 149 
+    ...
+    ...
+    ...
+    [Dan masih banyak lagi]
+    ```
+
 ### Soal 2
 
 Menggunakan wireshark, capture hasil keluaran dari program `udp_simple.py` ke alamat **127.0.0.1** ke port **5006**.
@@ -87,32 +115,47 @@ sock.sendto( bytes(data_to_send.encode()), (TARGET_IP,TARGET_PORT) )
     ip.dst == 127.0.0.1 && udp.port == 5006
     ```
 
-- Output pada console setelah program dijalankan
-
-    ```
-    b'F' terkirim 1 of 149 
-    b'i' terkirim 2 of 149 
-    b'l' terkirim 3 of 149 
-    b'e' terkirim 4 of 149 
-    b' ' terkirim 5 of 149 
-    b'T' terkirim 6 of 149 
-    b'e' terkirim 7 of 149 
-    b's' terkirim 8 of 149 
-    b't' terkirim 9 of 149 
-    b'\r' terkirim 10 of 149 
-    b'\n' terkirim 11 of 149 
-    b'=' terkirim 12 of 149 
-    b'=' terkirim 13 of 149 
-    b'=' terkirim 14 of 149 
-    b'=' terkirim 15 of 149 
-    ...
-    ...
-    ...
-    [Dan masih banyak lagi]
-    ```
-
 - Hasil capture setelah program dijalankan
 
     ![](img/SS1.png)
 
     Dapat dilihat pada box warna merah, data yang terkirim sesuai ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").
+
+----
+
+## Mengirim ke komputer lain
+
+IP Komputer lain : **192.168.100.21**
+
+----
+
+### Soal 1
+
+Menggunakan wireshark, capture hasil keluaran dari program `udpfileclient.py` ke alamat **192.168.100.21** ke port **5006**.
+
+> Dalam hal ini, nama file yang dikirim adalah "test.txt".
+
+- **Command** filter pada wireshark
+
+    ```
+    ip.dst == 192.168.100.21 && udp.port == 5006
+    ```
+
+- Hasil capture setelah program dijalankan
+
+    ![](img/wireshark1-computer.png)
+
+### Soal 2
+
+Menggunakan wireshark, capture hasil keluaran dari program `udp_simple.py` ke alamat **192.168.100.21** ke port **5006**.
+
+- **Command** filter pada wireshark
+
+    ```
+    ip.dst == 192.168.100.21 && udp.port == 5006
+    ```
+
+- Hasil capture setelah program dijalankan
+
+    ![](img/wireshark2-computer.png)
+

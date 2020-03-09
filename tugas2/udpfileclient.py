@@ -2,7 +2,7 @@ import socket
 import os
 
 # IP Address target and port
-TARGET_IP = "127.0.0.1"
+TARGET_IP = "192.168.100.21"
 TARGET_PORT = 5006
 
 # Initialize for UDP socket
