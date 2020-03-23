@@ -101,6 +101,10 @@ Kemudian untuk file yang di-upload akan dicatat beberapa informasi dalam bentuk 
 
 ## Daftar Fitur
 
+**[PENTING] Mekanisme clientnya adalah :**
+1. **Setiap fitur tidak dipisahkan ke client terpisah.**
+2. **Semua fitur dikerjakan oleh satu client menggunakan Command-Line Interface**
+
 Fitur-fitur yang tersedia dalam program ini adalah:
 
 - ### Meletakkan File
@@ -193,4 +197,18 @@ Cara/detail untuk melakukan request pada masing-masing fitur adalah sebagai beri
 
     ![](img/download3.png)
 
+    Log pada server
+
+    ![](img/server4.png)
+
 - Melihat List File
+
+    list all
+
+    ![](img/listAll.png)
+
+    ![](img/listName.png)
+
+    log
+
+    ![](img/server5.png)
