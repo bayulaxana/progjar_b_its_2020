@@ -50,23 +50,23 @@ tugas4/
 ## Mekanisme Program
 
 1. Server harus dinyalakan terlebih dahulu agar siap menerima request dari client. Tugas ini dilakukan oleh file `Server.py`.
-```py
-# Server.py
-def run(self):
-    self.sockets.bind( (self.ipAddr, self.portConn) )
-    self.sockets.listen(1)
+    ```py
+    # Server.py
+    def run(self):
+        self.sockets.bind( (self.ipAddr, self.portConn) )
+        self.sockets.listen(1)
 
-    while True:
-        self.connection, self.clientAddr = self.sockets.accept()
-        print(f"New connection from {self.clientAddr}")
-        
-        client = ClientHandler(self.connection, self.clientAddr)
-        client.start()
-        self.clients.append(client)
-```
+        while True:
+            self.connection, self.clientAddr = self.sockets.accept()
+            print(f"New connection from {self.clientAddr}")
+            
+            client = ClientHandler(self.connection, self.clientAddr)
+            client.start()
+            self.clients.append(client)
+    ```
 
-![](img/server1.png)
-> Server menunggu koneksi dari client
+    ![](img/server1.png)
+    > Server menunggu koneksi dari client
 
 2. Kemudian program `Client.py` dijalankan untuk menginputkan perintah (command) yang nantinya dikirim ke server.
 
@@ -167,11 +167,11 @@ Cara/detail untuk melakukan request pada masing-masing fitur adalah sebagai beri
 
     ![](img/server3.png)
 
-- Mengambil File
+- ### Mengambil File
 
     Perintah: **`download`**<br>
     Argumen: **`--name`**<br>
-    Value: nama file yang hendak diupload
+    Value: nama file yang hendak didownload
 
     ```
     > download --name [fileName]
