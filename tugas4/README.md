@@ -65,7 +65,18 @@ def run(self):
         self.clients.append(client)
 ```
 
+![](img/server1.png)
+> Server menunggu koneksi dari client
+
 2. Kemudian program `Client.py` dijalankan untuk menginputkan perintah (command) yang nantinya dikirim ke server.
+
+    - Program client menghubungkan ke server.
+        
+        ![](img/client1.png)
+
+    - Server merespon koneksi dari client
+
+        ![](img/server2.png)
 
 ----
 
@@ -92,24 +103,94 @@ Kemudian untuk file yang di-upload akan dicatat beberapa informasi dalam bentuk 
 
 Fitur-fitur yang tersedia dalam program ini adalah:
 
-### Meletakkan File
+- ### Meletakkan File
 
-Dalam fitur ini, **client** dapat meng-upload sebuah file yang nantinya file tersebut akan disimpan di dalam folder `fileserver` dan akan dicatat oleh database.
+    Dalam fitur ini, **client** dapat meng-upload sebuah file yang nantinya file tersebut akan disimpan di dalam folder `fileserver` dan akan dicatat oleh database.
 
-> File yang diupload akan mempunyai nama yang sama dengan nama asalnya.
+    > File yang diupload akan mempunyai nama yang sama dengan nama asalnya.
 
-### Mengambil File
+- ### Mengambil File
 
-Sedangkan pada fitur mengambil file, berarti **client** dapat melakukan download sebuah file dari `fileserver` untuk disimpan dalam lokal.
+    Sedangkan pada fitur mengambil file, berarti **client** dapat melakukan download sebuah file dari `fileserver` untuk disimpan dalam lokal.
 
-> File yang didownload akan mempunyai nama yang sama dengan nama asalnya.
+    > File yang didownload akan mempunyai nama yang sama dengan nama asalnya.
 
 
-### Melihat List File
+- ### Melihat List File
 
-Client juga dapat melihat list dari file-file apa saja yang berada di folder `fileserver`. Terdapat dua cara penggunaan, yakni:
+    Client juga dapat melihat list dari file-file apa saja yang berada di folder `fileserver`. Terdapat dua cara penggunaan, yakni:
 
-- Melihat detail dari sebuah file, atau
-- Melihat detail dari semua file yang berada di `fileserver`
+    - Melihat detail dari sebuah file, atau
+    - Melihat detail dari semua file yang berada di `fileserver`
 
 ## Cara Melakukan Request
+
+Cara/detail untuk melakukan request pada masing-masing fitur adalah sebagai berikut.
+
+- ### Meletakkan File
+
+    Perintah: **`upload`**<br>
+    Argumen: **`--name`**<br>
+    Value: nama file yang hendak diupload
+    
+    ```
+    > upload --name [fileName]
+    ```
+
+    Contoh :
+
+    Misalkan hendak meng-upload file `TestUpload.txt`.
+    
+    **Sebelum upload:**
+
+    ![](img/upload1.png)
+
+    Perintah:
+
+    ```
+    > upload --name TestUpload.txt
+    ```
+
+    ![](img/upload2.png)
+
+    **Sesudah:**
+
+    ![](img/upload3.png)
+
+    > File `TestUpload.txt` sudah ter-upload pada folder `fileserver`.
+
+    Log pada server
+
+    ![](img/server3.png)
+
+- Mengambil File
+
+    Perintah: **`download`**<br>
+    Argumen: **`--name`**<br>
+    Value: nama file yang hendak diupload
+
+    ```
+    > download --name [fileName]
+    ```
+
+    Contoh:
+
+    Misalkan hendak men-download file **`fileTest.txt`** dari folder `fileserver`.
+
+    **Sebelum:**
+
+    ![](img/download1.png)
+
+    Perintah:
+
+    ```
+    > download --name fileTest.txt
+    ```
+
+    ![](img/download2.png)
+
+    **Sesudah:**
+
+    ![](img/download3.png)
+
+- Melihat List File

@@ -39,6 +39,9 @@ class Server(threading.Thread):
         self.sockets.bind( (self.ipAddr, self.portConn) )
         self.sockets.listen(1)
 
+        print(f"Starting server on {self.ipAddr} port {self.portConn}")
+        print("========================================================\n")
+
         while True:
             self.connection, self.clientAddr = self.sockets.accept()
             print(f"New connection from {self.clientAddr}")

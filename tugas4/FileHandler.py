@@ -4,7 +4,6 @@ import logging
 import os
 
 DB = FileDBHandler()
-
 class FileHandler:
     def __init__(self):
         self.dbLocation = "database/db.dat"
@@ -43,8 +42,17 @@ class FileHandler:
             resp += json.dumps(x, indent=2) + "\n"
         return resp
 
-    def deleteFile(self, filename: str):
-        pass
+    def getFile(self, filename: str):
+        if DB.exist(filename) == False:
+            return f"Cannot find \"{filename}\" on the server\n"
+        else:
+            files = DB.getAll()
+            resp = ""
+            for x in files:
+                if x["fileName"] == filename:
+                    resp += json.dumps(x, indent=2) + "\n"
+                    break
+            return resp
 
     def downloadFile(self, filename: str):
         # file destination
@@ -65,7 +73,6 @@ class FileHandler:
         return resp
 
 fileHandler = FileHandler()
-
 class CommandExecutor:
     def checkCommand(self, cmd: str):
         cmdList = ["upload", "download", "list", "exit", "quit"]
@@ -75,8 +82,11 @@ class CommandExecutor:
     def upload(self, arg: str, filename: str):
         return fileHandler.uploadFile(filename)
 
-    def list(self):
-        return fileHandler.listFile()
+    def list(self, arg: str, filename=None):
+        if arg == "--all":
+            return fileHandler.listFile()
+        else:
+            return fileHandler.getFile(filename)
 
     def download(self, arg: str, filename: str):
         return fileHandler.downloadFile(filename)
@@ -92,14 +102,10 @@ class CommandExecutor:
             resp = self.upload(cmdSplit[1], cmdSplit[2])
             return resp
         elif cmd == "list":
-            resp = self.list()
-            return resp
+            if cmdSplit[1] == "--all":
+                return self.list(cmdSplit[1])
+            else:
+                return self.list(cmdSplit[1], cmdSplit[2])
         elif cmd == "download":
             resp = self.download(cmdSplit[1], cmdSplit[2])
             return resp
-
-
-if __name__ == "__main__":
-    x = {"name":1, "talent":23}
-    z = json.dumps(x)
-    print(z)
