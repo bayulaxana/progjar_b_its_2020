@@ -28,11 +28,12 @@ class FileHandler:
             else:
                 DB.update(filename)
             # response
-            resp += f"File {filename} successfully uploaded\n"
+            resp += f"File \"{filename}\" successfully uploaded\n"
         except:
             # case when file not found
-            resp += f"File {filename} not found\n"
+            resp += f"File \"{filename}\" not found\n"
             dest.close()
+            os.remove(filename)
         return resp
 
     def listFile(self):
@@ -56,16 +57,21 @@ class FileHandler:
                     fileDest.write(buff)
                     buff = f.read()
             fileDest.close()
-            resp += f"File {filename} successfully downloaded\n"
+            resp += f"File \"{filename}\" successfully downloaded\n"
         except:
             # case when file not found
-            resp += f"Cannot find {filename} on the server\n"
+            resp += f"Cannot find \"{filename}\" on the server\n"
             os.remove(filename)
         return resp
 
 fileHandler = FileHandler()
 
 class CommandExecutor:
+    def checkCommand(self, cmd: str):
+        cmdList = ["upload", "download", "list", "exit", "quit"]
+        if cmd in cmdList: return True
+        else: return False
+    
     def upload(self, arg: str, filename: str):
         return fileHandler.uploadFile(filename)
 
@@ -78,6 +84,9 @@ class CommandExecutor:
     def execute(self, cmdInput: str):
         cmdSplit = cmdInput.split(" ")
         cmd = cmdSplit[0]
+
+        if self.checkCommand(cmd) == False:
+            return "Error, unrecognized command\n"
 
         if cmd == "upload":
             resp = self.upload(cmdSplit[1], cmdSplit[2])

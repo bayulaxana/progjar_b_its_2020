@@ -3,6 +3,7 @@ import shelve
 import sys
 import json
 import time
+import os
 from datetime import datetime
 
 # definitions of class File
@@ -25,9 +26,11 @@ class FileDBHandler:
         fileID = str( uuid.uuid4() )
         fileName = filename
         timestamp = datetime.now()
+        fileSize = os.path.getsize(filename)
         fixedData = {
             "id": str(fileID),
             "fileName": fileName,
+            "fileSize": fileSize,
             "lastModified": str(timestamp)
         }
 
@@ -48,20 +51,6 @@ class FileDBHandler:
                 self.database[i]["lastModified"] = str(timestamp)
                 break
 
-    def getData(self, filename: str):
-        pass
-    
-    def deleteData(self, filename: str):
-        pass
-
     def getAll(self):
         ret = [ self.database[i] for i in self.database.keys() ]
         return ret
-
-if __name__ == "__main__":
-    x = FileDBHandler()
-    x.createData("haha.txt")
-    print(x.getAll())
-    time.sleep(5)
-    x.createData("haha.txt")
-    print(x.getAll())
