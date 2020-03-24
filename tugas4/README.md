@@ -96,14 +96,11 @@ Kemudian untuk file yang di-upload akan dicatat beberapa informasi dalam bentuk 
 
 - `id`- dari file yang di-upload.
 - Nama File
+- Ekstensi File
 - Ukuran File (dalam byte)
 - Timestamp
 
 ## Daftar Fitur
-
-**[PENTING] Mekanisme clientnya adalah :**
-1. **Setiap fitur tidak dipisahkan ke client terpisah.**
-2. **Semua fitur dikerjakan oleh satu client menggunakan Command-Line Interface**
 
 Fitur-fitur yang tersedia dalam program ini adalah:
 
@@ -201,14 +198,146 @@ Cara/detail untuk melakukan request pada masing-masing fitur adalah sebagai beri
 
     ![](img/server4.png)
 
-- Melihat List File
+- ### Melihat List File
 
-    list all
+    Perintah: **`list`**<br>
+    Argumen: **`--all`** atau **`--name`**<br>
+    Value: nama file yang hendak didownload jika menggunakan argumen `--name`
 
-    ![](img/listAll.png)
+    ```
+    > list --all
+    > list --name [fileName]
+    ```
 
-    ![](img/listName.png)
+    + Contoh `list -all`
 
-    log
+        Perintah `list --all` akan menampilkan respon dari server berupa JSON yang berisi informasi dari semua file yang berada pada `fileserver`.
 
-    ![](img/server5.png)
+        ```
+        > list --all
+        ```
+
+        ![](img/listAll.png)
+
+    + Contoh `list --name [fileName]`
+
+        Perintah `list --name [fileName]` akan menampilkan respon dari server berupa JSON yang berisi informasi dari nama file yang dinginkan dari folder `fileserver`.
+
+        ```
+        > list --name fileTest.txt
+        ```
+
+        ![](img/listName.png)
+
+## Respon yang didapat Client
+
+Client akan memperoleh respon dari server sesuai dengan perintah yang dikirimkan. **Semua respon diterima oleh client dalam bentuk JSON (Javascript Object Notation)**.
+
+- ### Meletakkan File
+
+    Respon yang didapatkan client setelah upload berupa file response text dan detail informasi file yang telah diupload **dalam bentuk JSON**.
+
+    ![](img/upload_response.png)
+
+- ### Mengambil File
+
+    Respon yang didapatkan client setelah download file berupa response text dan detail informasi file yang telah didownload **dalam bentuk JSON**.
+
+    ![](img/download_response.png)
+
+- ### Melihat List File
+
+    Respon yang didapatkan client pada fitur ini, tergantung argumen yang dikirimkan ke server. Terdapat dua argumen, yakni `--all` atau `--name [fileName]`. Masing-masing respon **berupa JSON** yang berisi detail informasi file.
+
+    + `list --all`
+
+        ![](img/listAll.png)
+
+    + `list --name [fileName]`
+
+        ![](img/listName.png)
+
+## Client Untuk Melakukan Operasi
+
+- [**Program Client.py dapat dilihat disini >**](Client.py)
+- [**Program untuk menangani request client >**](Server.py)
+
+Seluruh operasi tersebut tidak dilakukan terpisah pada client tersendiri, melainkan menggunakan metode **Command-Line Interface pada satu client**. Mekanismenya adalah:
+
+1. Client mengirimkan string request ke server.
+
+    ```py
+    # Client.py
+
+    while True:
+        cmdInput = input("> ")
+        cmdSplit = cmdInput.split(" ")
+        cmd = cmdSplit[0]
+        
+        if cmd == "exit" or cmd == "quit":
+            sock.send(cmdInput.encode())
+            break
+        else:
+            if cmd == "download":
+                print("Downloading file...")
+            sock.send(cmdInput.encode())
+    ```
+
+2. Server akan menggunakan thread untuk memproses request dari client. Request akan dilimpahkan ke `ClientHandler`.
+
+    ```py
+    # Server.py
+
+    class ClientHandler(threading.Thread):
+    def __init__(self, connection, addr):
+        self.connection = connection
+        self.clientAddr = addr
+        threading.Thread.__init__(self)
+
+    def run(self):
+        while True:
+            data = self.connection.recv(1024)
+            comm = data.decode("utf-8")
+            if comm == "exit" or comm == "quit":
+                break
+            else:
+                print(f">> Received \"{comm}\" from {self.clientAddr}")
+                response = commExe.execute(comm)
+                self.connection.send(response.encode())
+        
+        print(f"Connection from {self.clientAddr} closed")
+        self.connection.close()
+    ```
+
+3. `ClientHandler` menggunakan `CommandExcecutor` untuk mengeksekusi request dari client.
+
+    ```py
+    # FileHandler.py
+
+    # Class CommandExecutor:
+    #
+    #
+    def execute(self, cmdInput: str):
+        cmdSplit = cmdInput.split(" ")
+        cmd = cmdSplit[0]
+
+        if self.checkCommand(cmd) == False:
+            return "Error, unrecognized command\n"
+
+        if cmd == "upload":
+            resp = self.upload(cmdSplit[1], cmdSplit[2])
+            return resp
+        elif cmd == "list":
+            if cmdSplit[1] == "--all":
+                return self.list(cmdSplit[1])
+            else:
+                return self.list(cmdSplit[1], cmdSplit[2])
+        elif cmd == "download":
+            resp = self.download(cmdSplit[1], cmdSplit[2])
+            return resp
+    ```
+
+4. Sisanya akan dilakukan oleh `FileHandler.py` dan `FileDBHandler.py` untuk proses backend.
+
+5. `ClientHandler` akan mengembalikan respon ke client setelah perintah dijalankan.
+    

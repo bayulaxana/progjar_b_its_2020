@@ -1,7 +1,7 @@
-from FileDBHandler import *
 import json
 import logging
 import os
+from FileDBHandler import FileDBHandler
 
 DB = FileDBHandler()
 class FileHandler:
@@ -28,6 +28,8 @@ class FileHandler:
                 DB.update(filename)
             # response
             resp += f"File \"{filename}\" successfully uploaded\n"
+            resp += "Detailed information:\n"
+            resp += json.dumps(DB.get(filename), indent=2) + "\n"
         except:
             # case when file not found
             resp += f"File \"{filename}\" not found\n"
@@ -46,12 +48,8 @@ class FileHandler:
         if DB.exist(filename) == False:
             return f"Cannot find \"{filename}\" on the server\n"
         else:
-            files = DB.getAll()
-            resp = ""
-            for x in files:
-                if x["fileName"] == filename:
-                    resp += json.dumps(x, indent=2) + "\n"
-                    break
+            files = DB.get(filename)
+            resp = json.dumps(files, indent=2) + "\n"
             return resp
 
     def downloadFile(self, filename: str):
@@ -66,6 +64,8 @@ class FileHandler:
                     buff = f.read()
             fileDest.close()
             resp += f"File \"{filename}\" successfully downloaded\n"
+            resp += "Detailed information:\n"
+            resp += json.dumps(DB.get(filename), indent=2) + "\n"
         except:
             # case when file not found
             resp += f"Cannot find \"{filename}\" on the server\n"
@@ -109,3 +109,8 @@ class CommandExecutor:
         elif cmd == "download":
             resp = self.download(cmdSplit[1], cmdSplit[2])
             return resp
+
+if __name__ == "__main__":
+    x = FileHandler()
+    z = x.getFile("fileTest.txt")
+    print(z)

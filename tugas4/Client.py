@@ -31,8 +31,6 @@ if __name__ == "__main__":
         if cmd == "exit" or cmd == "quit":
             sock.send(cmdInput.encode())
             break
-        elif cmd == "help":
-            pass
         else:
             if cmd == "download":
                 print("Downloading file...")

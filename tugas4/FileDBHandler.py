@@ -8,10 +8,6 @@ from datetime import datetime
 
 # definitions of class File
 class FileDBHandler:
-    
-    # Constructor
-    ## it creates databases for storing attributes
-    ## of files
     def __init__(self):
         self.database = shelve.open("database/db.dat", writeback=True)
 
@@ -24,14 +20,16 @@ class FileDBHandler:
             return False
 
         fileID = str( uuid.uuid4() )
-        fileName = filename
+        fileNameWExt, fileExt = os.path.splitext(filename)
+        fileName = fileNameWExt + fileExt
         timestamp = datetime.now()
         fileSize = os.path.getsize(filename)
         fixedData = {
             "id": str(fileID),
             "fileName": fileName,
+            "fileExtension": fileExt,
             "fileSize": fileSize,
-            "lastModified": str(timestamp)
+            "timestamps": str(timestamp)
         }
 
         self.database[fileID] = fixedData
@@ -48,9 +46,14 @@ class FileDBHandler:
         timestamp = datetime.now()
         for i in self.database.keys():
             if self.database[i]["fileName"] == filename:
-                self.database[i]["lastModified"] = str(timestamp)
+                self.database[i]["timestamps"] = str(timestamp)
                 break
 
     def getAll(self):
         ret = [ self.database[i] for i in self.database.keys() ]
         return ret
+    
+    def get(self, filename: str):
+        for i in self.database.keys():
+            if self.database[i]["fileName"] == filename:
+                return self.database[i]
