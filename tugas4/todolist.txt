@@ -1,3 +1,0 @@
-- Di JSON-nya ditambahin konten file
-- Menambahkan respon berupa JSON untuk upload dan download
-- Memperbarui README
