@@ -26,10 +26,12 @@ Bukalah browser arahkan ke http://127.0.0.1:10002/sending.html , isilah dengan s
 
 **Modifikasilah agar server dapat membalas dengan isi:**
 
-- semua header yang dikirim dari browser,
+- Semua header yang dikirim dari browser,
 - Yang anda isikan di form pada saat mengisi pada poin nomor 5, misalkan mengisi “ISILAH” maka server akan mereply dengan “ISILAH” juga , dan bukan ‘kosong’.
 
 ### Hasil
+
+*Program modifikasi dapat dilihat pada file [http.py](http.py) dan [server_thread_http.py](server_thread_http.py)*
 
 - Membuka http://127.0.0.1:10002/sending.html dan mengisikan form dengan sebuah string, contohnya disini adalah **`BayuLaksana`**.
 
