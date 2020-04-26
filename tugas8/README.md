@@ -43,6 +43,5 @@ Bukalah browser arahkan ke http://127.0.0.1:10002/sending.html , isilah dengan s
 
     > Konten kotak oranye bagian atas adalah isi **header request dari browser**. Sedangkan bagian bawah merupakan **isi dari form** yang dikirim.
 
+    
     ![](img/img-5.jpg)
-
-    > Request header pada bagian network.
