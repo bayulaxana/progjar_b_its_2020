@@ -21,14 +21,14 @@ class ProcessTheClient(threading.Thread):
 				data = self.connection.recv(1000)
 				if data:
 					d = data.decode()
-					rcv=rcv+d
+					rcv = rcv+d
 					#end of command, proses string
 					logging.warning("data dari client: {}" . format(rcv))
 					hasil = httpserver.proses(rcv)
-					hasil=hasil+"\r\n\r\n"
+					hasil = hasil+"\r\n\r\n"
 					logging.warning("balas ke  client: {}" . format(hasil))
 					self.connection.sendall(hasil.encode())
-					rcv=""
+					rcv = ""
 					self.connection.close()
 				else:
 					break
@@ -55,8 +55,6 @@ class Server(threading.Thread):
 			clt = ProcessTheClient(self.connection, self.client_address)
 			clt.start()
 			self.the_clients.append(clt)
-
-
 
 def main():
 	svr = Server()
